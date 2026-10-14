@@ -1,0 +1,294 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --kb-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --kb-font-display: 'Merriweather', Georgia, serif;
+  --kb-primary: #22c55e;
+  --kb-primary-strong: #16a34a;
+  --kb-surface: rgba(255, 255, 255, 0.25);
+  --kb-surface-strong: rgba(255, 255, 255, 0.3);
+  --kb-border: rgba(255, 255, 255, 0.3);
+  --kb-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
+  --kb-shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.12);
+  --kb-text: #0f172a;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--kb-font-body);
+}
+
+.main-wrapper,
+#root > div {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark .main-wrapper,
+.dark #root > div {
+  background:
+    linear-gradient(180deg, rgba(4, 10, 6, 0.85), rgba(4, 10, 6, 0.92)) no-repeat center center fixed,
+    url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: soft-light, normal;
+}
+
+body {
+  font-family: var(--kb-font-body);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(236, 248, 239, 0.72)) no-repeat center center fixed,
+    url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: soft-light, normal;
+  background-color: #f5faf4; /* fallback */
+  color: var(--kb-text);
+  animation: kb-hero-zoom 46s ease-in-out infinite alternate;
+  width: 100%;
+  min-height: 100vh;
+  @apply antialiased transition-colors duration-300;
+}
+
+button,
+input,
+select,
+textarea,
+table {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.headline-text {
+  font-family: var(--kb-font-display);
+  letter-spacing: -0.025em;
+}
+
+p,
+li,
+label,
+input,
+select,
+textarea,
+button,
+a,
+span {
+  letter-spacing: -0.01em;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: var(--kb-shadow);
+  @apply rounded-2xl;
+}
+
+.page-surface {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  @apply rounded-3xl;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-semibold tracking-tight transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60;
+    font-family: var(--kb-font-body);
+    box-shadow: var(--kb-shadow-soft);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--kb-primary), var(--kb-primary-strong));
+    color: #0b1f14;
+    @apply btn focus:ring-primary-200 hover:brightness-110;
+    box-shadow: 0 8px 22px rgba(34, 197, 94, 0.35);
+  }
+  .btn-secondary {
+    background: linear-gradient(135deg, #eef2f7, #e3e9f1);
+    color: #0f172a;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    @apply btn hover:shadow-md focus:ring-primary-200;
+  }
+  .btn-outline {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    @apply btn hover:bg-primary-50 focus:ring-primary-200;
+  }
+  .input {
+    font-family: var(--kb-font-body);
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    @apply w-full rounded-xl px-3 py-3 shadow-sm focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-colors duration-300 placeholder-gray-400;
+  }
+  .input.input-error { border-color: #f97373; @apply focus:border-red-400 focus:ring-red-400; }
+  .input.input-success { border-color: #22c55e; @apply focus:border-green-400 focus:ring-green-400; }
+  .card {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--kb-shadow);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    @apply rounded-2xl p-6 transition duration-300 text-gray-900 dark:text-gray-100;
+  }
+  .headline {
+    @apply text-left flex items-center gap-3 mb-6;
+  }
+  .headline-square {
+    @apply w-2 h-8 flex-shrink-0 bg-primary-600 rounded-sm;
+  }
+  .headline-text {
+    @apply text-2xl font-bold text-primary-800;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold border;
+  }
+  .badge-green { @apply badge bg-green-100 text-green-800 border-green-200; }
+  .badge-amber { @apply badge bg-amber-100 text-amber-800 border-amber-200; }
+  .badge-red { @apply badge bg-red-100 text-red-800 border-red-200; }
+  .badge-blue { @apply badge bg-blue-50 text-blue-700 border-blue-100; }
+  .badge-gray { @apply badge bg-slate-100 text-slate-700 border-slate-200; }
+  .dark .badge-gray { @apply bg-gray-700 text-gray-100 border-gray-600; }
+
+  .table-shell {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--kb-shadow);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    @apply w-full rounded-2xl overflow-hidden transition-colors duration-300;
+  }
+  .table-head {
+    font-family: var(--kb-font-body);
+    @apply bg-slate-50 text-xs uppercase tracking-wide text-slate-700 dark:bg-gray-700 dark:text-gray-100;
+  }
+  .table-row {
+    @apply border-b border-slate-100 dark:border-gray-700;
+  }
+  .table-row:nth-child(even) { background-color: rgba(248, 250, 252, 0.7); }
+  .table-row:hover { background-color: rgba(34, 197, 94, 0.08); }
+  .table-cell {
+    font-family: var(--kb-font-body);
+    @apply px-4 py-3 text-sm text-slate-800 dark:text-gray-100;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded-xl;
+  }
+
+  /* Home hero with full-bleed background + overlay */
+  .home-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(236, 248, 239, 0.68)) no-repeat center center fixed,
+      url('/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: soft-light, normal;
+    animation: kb-hero-zoom 46s ease-in-out infinite alternate;
+    @apply flex items-start px-4 py-10 md:py-14;
+  }
+
+  /* Foreground glass surface for content */
+  .home-bg {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    @apply w-full max-w-6xl mx-auto rounded-3xl p-6 md:p-8 transition-colors duration-300;
+  }
+  .dark .home-bg {
+    background: rgba(17, 24, 39, 0.82);
+    @apply border-gray-700;
+  }
+}
+
+.dark body {
+  background:
+    linear-gradient(180deg, rgba(4, 10, 6, 0.85), rgba(4, 10, 6, 0.92)) no-repeat center center fixed,
+    url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0f172a;
+  background-blend-mode: soft-light, normal;
+  width: 100%;
+  min-height: 100vh;
+  color: #f8fafc;
+  @apply text-gray-100;
+}
+
+.dark .page-surface {
+  background: rgba(17, 24, 39, 0.92);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.dark .card {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc;
+}
+.dark .card h1,
+.dark .card h2,
+.dark .card h3,
+.dark .card h4,
+.dark .card h5,
+.dark .card h6,
+.dark .card p,
+.dark .card li,
+.dark .card span {
+  color: #e2e8f0;
+}
+
+/* Increase text contrast in dark mode for commonly used neutral text colors */
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700,
+.dark .text-gray-600 {
+  color: #f8fafc !important;
+}
+.dark .text-gray-500,
+.dark .text-slate-500,
+.dark .text-gray-400 {
+  color: #e2e8f0 !important;
+}
+.dark .text-primary-800,
+.dark .text-primary-700,
+.dark .text-primary-600 {
+  color: #a7f3d0 !important;
+}
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark .headline-text {
+  color: #f8fafc !important;
+}
+.dark .headline-square {
+  background-color: #22c55e !important;
+}

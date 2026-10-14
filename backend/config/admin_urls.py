@@ -1,0 +1,33 @@
+from django.urls import path
+from . import admin_views
+
+urlpatterns = [
+    path('dashboard/', admin_views.AdminDashboardView.as_view()),
+    path('farmers/', admin_views.AdminFarmerList.as_view()),
+    path('farmers/<int:pk>/approve/', admin_views.AdminFarmerApprove.as_view()),
+    path('farmers/<int:pk>/reject/', admin_views.AdminFarmerReject.as_view()),
+    path('users/', admin_views.AdminAppUserList.as_view()),
+    path('users/<int:pk>/approve/', admin_views.AdminAppUserApprove.as_view()),
+    path('users/<int:pk>/unapprove/', admin_views.AdminAppUserUnapprove.as_view()),
+    path('workers/', admin_views.AdminWorkerList.as_view()),
+    path('workers/<int:pk>/approve/', admin_views.AdminWorkerApprove.as_view()),
+    path('workers/<int:pk>/unapprove/', admin_views.AdminWorkerUnapprove.as_view()),
+    path('officers/', admin_views.AdminOfficerListCreate.as_view()),
+    path('officers/<int:pk>/', admin_views.AdminOfficerDelete.as_view()),
+    path('farming-products/', admin_views.AdminFarmingProductList.as_view()),
+    path('orders/', admin_views.AdminOrderMasterList.as_view()),
+    path('fp-orders/', admin_views.AdminFpOrderMasterList.as_view()),
+    path('complaints/', admin_views.AdminComplaintList.as_view()),
+    path('complaints/<int:pk>/reply/', admin_views.AdminComplaintReply.as_view()),
+    path('seed-requests/', admin_views.AdminSeedRequestList.as_view()),
+    path('seed-requests/<int:pk>/approve/', admin_views.AdminSeedRequestApprove.as_view()),
+    path('seed-requests/<int:pk>/reject/', admin_views.AdminSeedRequestReject.as_view()),
+    path('stock-items/', admin_views.AdminStockItemList.as_view()),
+    path('subsidy-schemes/', admin_views.AdminSubsidySchemeList.as_view()),
+    path('subsidy-applications/', admin_views.AdminSubsidyApplicationList.as_view()),
+    path('subsidy-applications/<int:pk>/approve/', admin_views.AdminSubsidyApplicationApprove.as_view()),
+    path('subsidy-applications/<int:pk>/reject/', admin_views.AdminSubsidyApplicationReject.as_view()),
+    path('crop-disease-reports/', admin_views.AdminCropDiseaseReportList.as_view()),
+    path('crop-disease-reports/<int:pk>/reply/', admin_views.AdminCropDiseaseReportReply.as_view()),
+    path('notifications/', admin_views.AdminNotificationList.as_view()),
+]
